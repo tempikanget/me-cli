@@ -7,6 +7,7 @@ from app.client.ewallet import show_multipayment
 from app.menus.util import clear_screen, pause, display_html
 from app.client.qris import show_qris_payment_v2
 from app.client.ewallet import show_multipayment_v2
+from app.client.balance import settlement_balance
 from app.type_dict import PaymentItem
 
 
@@ -109,7 +110,20 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
             continue
         
         if choice == '1':
-            purchase_package(api_key, tokens, package_option_code, is_enterprise)
+            # purchase_package(api_key, tokens, package_option_code, is_enterprise)
+            settlement_balance(
+                api_key,
+                tokens,
+                [PaymentItem(
+                    item_code=package_option_code,
+                    product_type="",
+                    item_price=price,
+                    item_name=option_name,
+                    tax=0,
+                    token_confirmation=token_confirmation,
+                )],
+                ask_overwrite=True
+            )
             input("Silahkan cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
         elif choice == '2':
