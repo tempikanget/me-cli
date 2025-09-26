@@ -253,6 +253,7 @@ def get_balance(api_key: str, id_token: str) -> dict:
     
     print("Fetching balance...")
     res = send_api_request(api_key, path, raw_payload, id_token, "POST")
+    print(f"[GB-256]:\n{json.dumps(res, indent=2)}")
     
     if "data" in res:
         if "balance" in res["data"]:
