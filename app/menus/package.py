@@ -39,6 +39,17 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
     ts_to_sign = package["timestamp"]
     payment_for = package["package_family"]["payment_for"]
     
+    payment_items = [
+        PaymentItem(
+            item_code=package_option_code,
+            product_type="",
+            item_price=price,
+            item_name=option_name,
+            tax=0,
+            token_confirmation=token_confirmation,
+        )
+    ]
+    
     print("-------------------------------------------------------")
     print(f"Nama: {title}")
     print(f"Harga: Rp {price}")
@@ -52,6 +63,7 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
         for benefit in benefits:
             print("-------------------------------------------------------")
             print(f" Name: {benefit['name']}")
+            print(f"  Item id: {benefit['item_id']}")
             data_type = benefit['data_type']
             if data_type == "VOICE" and benefit['total'] > 0:
                 print(f"  Total: {benefit['total']/60} menit")
@@ -79,6 +91,21 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
                 print("  Unlimited: Yes")
     print("-------------------------------------------------------")
     addons = get_addons(api_key, tokens, package_option_code)
+    
+    # Pick 1st bonus if available, need more testing
+    # bonuses = addons.get("bonuses", [])
+    # if len(bonuses) > 0:
+    #     payment_items.append(
+    #         PaymentItem(
+    #             item_code=bonuses[0]["package_option_code"],
+    #             product_type="",
+    #             item_price=0,
+    #             item_name=bonuses[0]["name"],
+    #             tax=0,
+    #             token_confirmation="",
+    #         )
+    #     )
+
     print(f"Addons:\n{json.dumps(addons, indent=2)}")
     print("-------------------------------------------------------")
     print(f"SnK MyXL:\n{detail}")
@@ -123,14 +150,7 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
             settlement_balance(
                 api_key,
                 tokens,
-                [PaymentItem(
-                    item_code=package_option_code,
-                    product_type="",
-                    item_price=price,
-                    item_name=option_name,
-                    tax=0,
-                    token_confirmation=token_confirmation,
-                )],
+                payment_items,
                 ask_overwrite=True
             )
             input("Silahkan cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
@@ -140,14 +160,7 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
             show_multipayment_v2(
                 api_key,
                 tokens,
-                [PaymentItem(
-                    item_code=package_option_code,
-                    product_type="",
-                    item_price=price,
-                    item_name=option_name,
-                    tax=0,
-                    token_confirmation=token_confirmation,
-                )]
+                payment_items
             )
             input("Silahkan lakukan pembayaran & cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
@@ -156,14 +169,7 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
             show_qris_payment_v2(
                 api_key,
                 tokens,
-                [PaymentItem(
-                    item_code=package_option_code,
-                    product_type="",
-                    item_price=price,
-                    item_name=option_name,
-                    tax=0,
-                    token_confirmation=token_confirmation,
-                )]
+                payment_items
             )
             input("Silahkan lakukan pembayaran & cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
