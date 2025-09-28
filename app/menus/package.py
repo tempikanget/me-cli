@@ -1,7 +1,7 @@
 import json
 import sys
 from app.service.auth import AuthInstance
-from app.client.engsel import get_family, get_package, get_addons, purchase_package, send_api_request
+from app.client.engsel import get_family, get_family_v2, get_package, get_addons, purchase_package, send_api_request
 from app.service.bookmark import BookmarkInstance
 from app.client.purchase import show_qris_payment, settlement_bounty
 from app.client.ewallet import show_multipayment
@@ -185,8 +185,8 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
 
 def get_packages_by_family(
     family_code: str,
-    is_enterprise: bool = False,
-    migration_type: str = "NONE"
+    is_enterprise: bool | None = None,
+    migration_type: str | None = None
 ):
     api_key = AuthInstance.api_key
     tokens = AuthInstance.get_active_tokens()
@@ -197,7 +197,14 @@ def get_packages_by_family(
     
     packages = []
     
-    data = get_family(api_key, tokens, family_code, is_enterprise, migration_type)
+    # data = get_family(api_key, tokens, family_code, is_enterprise, migration_type)
+    data = get_family_v2(
+        api_key,
+        tokens,
+        family_code,
+        is_enterprise,
+        migration_type
+    )
     if not data:
         print("Failed to load family data.")
         return None    
@@ -209,7 +216,7 @@ def get_packages_by_family(
         print(f"Family Name: {data['package_family']['name']}")
         print(f"Family Code: {family_code}")
         print(f"Family Type: {data['package_family']['package_family_type']}")
-        print(f"Enterprise: {'Yes' if is_enterprise else 'No'}")
+        # print(f"Enterprise: {'Yes' if is_enterprise else 'No'}")
         print(f"Variant Count: {len(data['package_variants'])}")
         print("-------------------------------------------------------")
         print("Paket Tersedia")
