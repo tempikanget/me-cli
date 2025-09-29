@@ -44,7 +44,7 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
             item_code=package_option_code,
             product_type="",
             item_price=price,
-            item_name=option_name,
+            item_name=f"{variant_name} {option_name}".strip(),
             tax=0,
             token_confirmation=token_confirmation,
         )
@@ -53,6 +53,7 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
     print("-------------------------------------------------------")
     print(f"Nama: {title}")
     print(f"Harga: Rp {price}")
+    print(f"Payment For: {payment_for}")
     print(f"Masa Aktif: {validity}")
     print(f"Point: {package['package_option']['point']}")
     print(f"Plan Type: {package['package_family']['plan_type']}")
@@ -151,6 +152,7 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
                 api_key,
                 tokens,
                 payment_items,
+                payment_for,
                 ask_overwrite=True
             )
             input("Silahkan cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
@@ -160,7 +162,9 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
             show_multipayment_v2(
                 api_key,
                 tokens,
-                payment_items
+                payment_items,
+                payment_for,
+                True
             )
             input("Silahkan lakukan pembayaran & cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
@@ -169,7 +173,9 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
             show_qris_payment_v2(
                 api_key,
                 tokens,
-                payment_items
+                payment_items,
+                payment_for,
+                True
             )
             input("Silahkan lakukan pembayaran & cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
