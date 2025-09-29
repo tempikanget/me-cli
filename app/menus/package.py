@@ -93,8 +93,10 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
     print("-------------------------------------------------------")
     addons = get_addons(api_key, tokens, package_option_code)
     
+
+    bonuses = addons.get("bonuses", [])
+    
     # Pick 1st bonus if available, need more testing
-    # bonuses = addons.get("bonuses", [])
     # if len(bonuses) > 0:
     #     payment_items.append(
     #         PaymentItem(
@@ -102,6 +104,19 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
     #             product_type="",
     #             item_price=0,
     #             item_name=bonuses[0]["name"],
+    #             tax=0,
+    #             token_confirmation="",
+    #         )
+    #     )
+    
+    # Pick all bonuses, need more testing
+    # for bonus in bonuses:
+    #     payment_items.append(
+    #         PaymentItem(
+    #             item_code=bonus["package_option_code"],
+    #             product_type="",
+    #             item_price=0,
+    #             item_name=bonus["name"],
     #             tax=0,
     #             token_confirmation="",
     #         )
@@ -118,6 +133,10 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
         print("1. Beli dengan Pulsa")
         print("2. Beli dengan E-Wallet")
         print("3. Bayar dengan QRIS")
+        
+        # Sometimes payment_for is empty, so we set default to BUY_PACKAGE
+        if payment_for == "":
+            payment_for = "BUY_PACKAGE"
         
         if payment_for == "REDEEM_VOUCHER":
             print("4. Ambil sebagai bonus (jika tersedia)")
@@ -153,7 +172,8 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
                 tokens,
                 payment_items,
                 payment_for,
-                ask_overwrite=True
+                True,
+                amount_used="first"
             )
             input("Silahkan cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
@@ -164,7 +184,8 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
                 tokens,
                 payment_items,
                 payment_for,
-                True
+                True,
+                amount_used="first"
             )
             input("Silahkan lakukan pembayaran & cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
@@ -175,7 +196,8 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
                 tokens,
                 payment_items,
                 payment_for,
-                True
+                True,
+                amount_used="first"
             )
             input("Silahkan lakukan pembayaran & cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
