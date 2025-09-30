@@ -1,7 +1,7 @@
 import json
 import sys
 from app.service.auth import AuthInstance
-from app.client.engsel import get_family, get_family_v2, get_package, get_addons, purchase_package, send_api_request
+from app.client.engsel import get_family, get_family_v2, get_package, get_addons, get_package_details, purchase_package, send_api_request
 from app.service.bookmark import BookmarkInstance
 from app.client.purchase import show_qris_payment, settlement_bounty
 from app.client.ewallet import show_multipayment
@@ -198,6 +198,39 @@ def show_package_details(api_key, tokens, package_option_code, is_enterprise, op
                 payment_for,
                 True,
                 amount_used="first"
+            )
+            input("Silahkan lakukan pembayaran & cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
+            return True
+        elif choice == '9':
+            # Decoy
+            pd = get_package_details(
+                api_key,
+                tokens,
+                "5d63dddd-4f90-4f4c-8438-2f005c20151f",
+                "5b59c55b-0dc7-4f34-a6e9-6afa233ad53b",
+                6,
+                False,
+                "NONE",
+            )
+            
+            payment_items.append(
+                PaymentItem(
+                    item_code=pd["package_option"]["package_option_code"],
+                    product_type="",
+                    item_price=pd["package_option"]["price"],
+                    item_name=pd["package_option"]["name"],
+                    tax=0,
+                    token_confirmation=pd["token_confirmation"],
+                )
+            )
+
+            show_qris_payment_v2(
+                api_key,
+                tokens,
+                payment_items,
+                payment_for,
+                True,
+                amount_used=""
             )
             input("Silahkan lakukan pembayaran & cek hasil pembelian di aplikasi MyXL. Tekan Enter untuk kembali.")
             return True
