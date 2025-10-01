@@ -680,7 +680,7 @@ def get_package_details(
     family_code: str,
     variant_code: str,
     option_order: int,
-    is_enterprise: bool,
+    is_enterprise: bool | None = None,
     migration_type: str | None = None
 ) -> dict | None:
     family_data = get_family_v2(api_key, tokens, family_code, is_enterprise, migration_type)
