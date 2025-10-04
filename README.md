@@ -18,11 +18,11 @@ pkg install git -y
 ```
 3. Clone this repo
 ```
-git clone https://github.com/purplemashu/me-cli
+git clone https://github.com/barbexid/dor
 ```
 4. Open the folder
 ```
-cd me-cli
+cd dor
 ```
 5. Setup
 ```
@@ -31,6 +31,10 @@ bash setup.sh
 6. Run the script
 ```
 python main.py
+```
+python main2.py
+``````
+python main3.py
 ```
 7. Input your API key when prompted
 
