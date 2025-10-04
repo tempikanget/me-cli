@@ -28,7 +28,7 @@ cd dor
 ```
 bash setup.sh
 ```
-6. Run the script
+6. Run the script ( 1-full, 2-minimalist, 3-standard )
 ```
 python main.py
 ```
