@@ -32,7 +32,9 @@ bash setup.sh
 ```
 python main.py
 ```
+```
 python main2.py
+```
 ```
 python main3.py
 ```
