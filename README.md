@@ -27,20 +27,27 @@ pkg update && pkg upgrade -y
 pkg install git -y
 ```
 # 3. Kloning repositori
+```
 git clone https://github.com/barbexid/dor
-
+```
 # 4. Masuk ke folder
+```
 cd dor
-
+```
 # 5. Jalankan setup
+```
 bash setup.
-
+```
 # 6. Konfigurasi Environment Variables
+```
 nano .env
-
+```
 # 7. Jalankan skrip sesuai mode
+```
 python main.py     # Mode lengkap
+```
 python main2.py    # Mode minimalis
+```
 python main3.py    # Mode standar
 ```
 
