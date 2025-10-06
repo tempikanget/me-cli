@@ -18,7 +18,7 @@
 
 Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi:
 
-# 1. Perbarui Termux
+## 1. Perbarui Termux
 ```bash
 pkg update && pkg upgrade -y
 ```
