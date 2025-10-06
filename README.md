@@ -36,19 +36,24 @@ cd dor
 ```
 # 5. Jalankan setup
 ```
-bash setup.
+bash setup.sh
 ```
 # 6. Konfigurasi Environment Variables
 ```
 nano .env
 ```
 # 7. Jalankan skrip sesuai mode
+Mode lengkap
 ```
-python main.py     # Mode lengkap
+python main.py
 ```
-python main2.py    # Mode minimalis
+Mode minimalis
 ```
-python main3.py    # Mode standar
+python main2.py
+```
+Mode standar
+```
+python main3.py
 ```
 
 > 💡 Masukkan API key saat diminta setelah menjalankan skrip.
