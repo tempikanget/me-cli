@@ -18,13 +18,14 @@
 
 Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi:
 
-```bash
 # 1. Perbarui Termux
+```bash
 pkg update && pkg upgrade -y
-
+```
 # 2. Instal Git
+```
 pkg install git -y
-
+```
 # 3. Kloning repositori
 git clone https://github.com/barbexid/dor
 
