@@ -1,52 +1,62 @@
-# MYnyak Engsel
+# 🛠️ MYnyak Engsel
 
 ![banner](bnr.png)
 
-CLI client for a certain Indonesian mobile internet service provider.
+**MYnyak Engsel** adalah aplikasi CLI untuk mengakses layanan internet seluler tertentu di Indonesia secara efisien dan fleksibel melalui Termux.
 
-# How to get API Key
-Chat telegram bot [@fykxt_bot](https://t.me/fykxt_bot) with message `/viewkey`. Copy the API key.
+---
 
-# How to run with TERMUX
-1. Update & Upgrade Termux
-```
+## 🔑 Cara Mendapatkan API Key
+
+1. Buka Telegram dan cari bot [@fykxt_bot](https://t.me/fykxt_bot).
+2. Kirim pesan `/viewkey`.
+3. Salin API key yang diberikan oleh bot.
+
+---
+
+## 📦 Instalasi di Termux
+
+Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi:
+
+```bash
+# 1. Perbarui Termux
 pkg update && pkg upgrade -y
-```
-2. Install Git
-```
+
+# 2. Instal Git
 pkg install git -y
-```
-3. Clone this repo
-```
+
+# 3. Kloning repositori
 git clone https://github.com/barbexid/dor
-```
-4. Open the folder
-```
+
+# 4. Masuk ke folder
 cd dor
-```
-5. Setup
-```
-bash setup.sh
-```
-6. Run the script ( 1-full, 2-minimalist, 3-standard )
-```
-python main.py
-```
-```
-python main2.py
-```
-```
-python main3.py
-```
-7. Input your API key when prompted
 
-# Info
+# 5. Jalankan setup
+bash setup.
 
-## PS for Certain Indonesian mobile internet service provider
+# 6. Konfigurasi Environment Variables
+nano .env
 
-Instead of just delisting the package from the app, ensure the user cannot purchase it.
-What's the point of strong client side security when the server don't enforce it?
+# 7. Jalankan skrip sesuai mode
+python main.py     # Mode lengkap
+python main2.py    # Mode minimalis
+python main3.py    # Mode standar
+```
 
-## Contact
+> 💡 Masukkan API key saat diminta setelah menjalankan skrip.
 
-contact@mashu.lol
+---
+
+## ℹ️ Catatan Teknis
+
+> Untuk penyedia layanan internet seluler tertentu
+
+---
+
+## 📬 Kontak
+
+Jika ada pertanyaan atau masukan, silakan hubungi:
+
+**Email:** [contact@mashu.lol](mailto:contact@mashu.lol)
+
+---
